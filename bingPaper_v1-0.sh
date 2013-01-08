@@ -63,7 +63,7 @@ picAssc=$(curl -s $xmlURL | grep -oP "<copyright>(.*)</copyright>" | cut -d "/" 
 picCapt=$(curl -s $xmlURL | grep -oP "<copyright>(.*)</copyright>" | cut -d "(" -f 1 | cut -d ">" -f 2 | sed 's/ *$//g')
 
 # $picName contains the filename of the Bing pic of the day
-picName=$fetchedFrom'_'${picURL#*2f}
+picName=$fetchedFrom'_'$(echo $picURL | rev | cut -d '/' -f 1 | rev)
 
 # Download the Bing pic of the day
 curl -s -o $saveDir$picName $picURL
